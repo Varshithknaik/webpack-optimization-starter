@@ -1,15 +1,6 @@
-let data = [
-    {
-        "id": 1560865205317,
-        "text": "Buy eggs",
-        "completed": false
-    },
-    {
-        "id": 1560865205318,
-        "text": "Do 15 min exercise",
-        "completed": false
-    }
-]
+import initialTodos from '../todos.json'
+
+let data = initialTodos
 
 function getAllTodos() {
     return data
