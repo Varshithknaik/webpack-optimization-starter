@@ -3,6 +3,9 @@ const { merge } = require('webpack-merge');
 const path = require('path');
 
 module.exports = merge( common , {
+  output: {
+    filename: 'bundle.js'
+  },
   mode: 'development',
   devServer: {
     port: 9000,
@@ -17,5 +20,13 @@ module.exports = merge( common , {
       overlay: true // Show in full screen incase of error or warning
     },
     liveReload: false
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   }
 })
