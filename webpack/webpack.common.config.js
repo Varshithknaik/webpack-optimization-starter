@@ -1,11 +1,11 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
-  entry: './src/js/index.js',
+  entry: "./src/js/index.js",
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    // clean: true
+    path: path.resolve(__dirname, "../dist"),
+    clean: true,
     // clean: {
     //   // dry: true, // webpack will logs which files would be removed, but won't actually delete them
     //   keep: /\.css/ // webpack to keep the files
@@ -15,14 +15,14 @@ const config = {
     rules: [
       {
         test: /\.html$/i,
-        use: [ { loader: 'html-loader' }]
+        use: [{ loader: "html-loader" }],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/template.html',
+      filename: "index.html",
+      template: "src/template.html",
     }),
     // new CleanWebpackPlugin({
     //   cleanOnceBeforeBuildPatterns: [
@@ -30,7 +30,7 @@ const config = {
     //     path.join(process.cwd(), 'build/**/*'), // The path.join(process.cwd(), 'build/**/*') explicitly tells it: also clean inside build.
     //   ]
     // })
-  ]
-}
+  ],
+};
 
 module.exports = config;
