@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge( common , {
   output: {
-    filename: '[name].[contenthash:12].js',
+    filename: 'js/[name].[contenthash:12].js',
   },
   mode: 'production',
   module: {
@@ -17,7 +17,7 @@ module.exports = merge( common , {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:12].css'  // Default of contenthash is just name itself :12 makes it to include just 12 characters
+      filename: 'css/[name].[contenthash:12].css'  // Default of contenthash is just name itself :12 makes it to include just 12 characters
     })
   ]
 })
