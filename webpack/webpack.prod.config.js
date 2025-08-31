@@ -1,18 +1,35 @@
-const common = require('./webpack.common.config.js');
-const { merge } = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const common = require("./webpack.common.config.js");
+const { merge } = require("webpack-merge");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-module.exports = merge( common , {
+module.exports = merge(common, {
   output: {
-    filename: 'js/[name].[contenthash:12].js',
+    filename: "js/[name].[contenthash:12].js",
   },
-  mode: 'production',
+  mode: "production",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      `...`, // To keep the existing minimizer
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
+  },
   module: {
     rules: [
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.css$/,
@@ -20,20 +37,24 @@ module.exports = merge( common , {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: {
-                localIdentName: '[hash:base64]'
-              }
-            }
-          }
-        ]
-      }
-    ]
+                localIdentName: "[hash:base64]",
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:12].css'  // Default of contenthash is just name itself :12 makes it to include just 12 characters
-    })
-  ]
-})
+      filename: "css/[name].[contenthash:12].css", // Default of contenthash is just name itself :12 makes it to include just 12 characters
+    }),
+  ],
+});
