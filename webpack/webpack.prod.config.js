@@ -2,6 +2,9 @@ const common = require("./webpack.common.config.js");
 const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
+const glob = require("glob");
+const path = require("path");
 
 module.exports = merge(common, {
   output: {
@@ -64,6 +67,11 @@ module.exports = merge(common, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:12].css", // Default of contenthash is just name itself :12 makes it to include just 12 characters
+    }),
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${path.join(__dirname, "../src/")}/**/*`, {
+        nodir: true,
+      }),
     }),
   ],
 });

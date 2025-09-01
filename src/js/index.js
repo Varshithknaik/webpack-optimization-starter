@@ -1,3 +1,4 @@
+import "../styles/vendors.scss";
 import "../styles/index.scss";
 
 import {
@@ -21,5 +22,3 @@ document.addEventListener("click", function (event) {
     toggleTodoEventListener(event);
   }
 });
-
-console.log("Hello World");
