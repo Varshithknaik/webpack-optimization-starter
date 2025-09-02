@@ -1,6 +1,8 @@
 import * as styles from "../styles/notification.module.css";
 import jss from "jss";
 import preset from "jss-preset-default";
+import CheckboxImage from "../../images/checkmark.svg";
+
 jss.setup(preset());
 
 const checkboxSize = "30px";
@@ -26,7 +28,7 @@ export function renderTodos(todos) {
     return `
             <li data-id="${todo.id}" class="${className}">
                 <span class="custom-checkbox">
-                    <img class="check" src="../../images/checkmark.svg" width="22" height="22"></img>
+                    <img class="check" src="${CheckboxImage}" width="22" height="22"></img>
                     <input data-element="real-checkbox" class="${classes.realCheckbox}" type="checkbox" ${completionClass} />
                 </span>
                 <label>${todo.text}</label>
