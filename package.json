@@ -33,6 +33,8 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "glob": "^11.0.3",
+    "jss": "^10.10.0",
+    "jss-preset-default": "^10.10.0",
     "webpack-merge": "^6.0.1"
   }
 }
