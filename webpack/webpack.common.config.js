@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const config = {
   entry: "./src/js/index.js",
@@ -30,6 +31,13 @@ const config = {
     //     path.join(process.cwd(), 'build/**/*'), // The path.join(process.cwd(), 'build/**/*') explicitly tells it: also clean inside build.
     //   ]
     // })
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "images/motivational-pictures/*.*",
+        },
+      ],
+    }),
   ],
 };
 

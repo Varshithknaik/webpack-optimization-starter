@@ -2,6 +2,7 @@ import * as styles from "../styles/notification.module.css";
 import jss from "jss";
 import preset from "jss-preset-default";
 import CheckboxImage from "../../images/checkmark.svg";
+import { getMotivationalPictures } from "./api";
 
 jss.setup(preset());
 
@@ -37,6 +38,7 @@ export function renderTodos(todos) {
         `;
   });
   document.querySelector(".todo-list").innerHTML = renderedItemArray.join("");
+  renderMotivationalPicture();
 }
 
 export function clearNewTodoInput() {
@@ -66,4 +68,24 @@ function showNotification() {
   setTimeout(() => {
     notificationDiv.remove();
   }, 2000);
+}
+
+function renderMotivationalPicture() {
+  getMotivationalPictures().then((pictures) => {
+    const motivationalPicturesHtml = `
+            <div class="motivational-pictures"> 
+             ${pictures.map((picture) => {
+               return (
+                 '<img class="header-image" src="' +
+                 picture +
+                 '" alt="motivational"/>'
+               );
+             })}
+        `;
+
+    const motivationalPicturesContainer = document.querySelector(
+      ".motivational-pictures-container"
+    );
+    motivationalPicturesContainer.innerHTML = motivationalPicturesHtml;
+  });
 }
