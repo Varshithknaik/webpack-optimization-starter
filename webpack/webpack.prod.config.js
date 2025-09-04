@@ -39,8 +39,8 @@ module.exports = merge(common, {
                 {
                   plugins: [
                     {
-                      removeViewBox: true,
                       name: "preset-default",
+                      removeViewBox: true,
                       active: false,
                       params: {
                         overrides: {
@@ -55,12 +55,32 @@ module.exports = merge(common, {
                         },
                       },
                     },
+                    {
+                      name: "addAttributesToSVGElement",
+                      params: {
+                        attributes: [
+                          {
+                            class: "optimized-svg-icon",
+                          },
+                        ],
+                      },
+                    },
                   ],
                 },
               ],
             ],
           },
         },
+        generator: [
+          {
+            type: "asset",
+            preset: "webp-custom-name",
+            implementation: ImageMinimizerPlugin.imageminGenerate,
+            options: {
+              plugins: ["imagemin-webp"],
+            },
+          },
+        ],
       }),
     ],
   },

@@ -3,9 +3,9 @@ export function getMotivationalPictures() {
     setTimeout(
       () =>
         resolve([
-          "images/motivational-pictures/photo1.jpg",
-          "images/motivational-pictures/photo2.jpg",
-          "images/motivational-pictures/photo3.jpg",
+          "images/motivational-pictures/photo1.webp",
+          "images/motivational-pictures/photo2.webp",
+          "images/motivational-pictures/photo3.webp",
         ]),
       700
     );
