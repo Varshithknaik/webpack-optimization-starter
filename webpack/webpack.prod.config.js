@@ -55,16 +55,6 @@ module.exports = merge(common, {
                         },
                       },
                     },
-                    {
-                      name: "addAttributesToSVGElement",
-                      params: {
-                        attributes: [
-                          {
-                            class: "optimized-svg-icon",
-                          },
-                        ],
-                      },
-                    },
                   ],
                 },
               ],

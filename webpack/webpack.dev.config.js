@@ -1,12 +1,41 @@
 const common = require("./webpack.common.config.js");
 const { merge } = require("webpack-merge");
 const path = require("path");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = merge(common, {
   output: {
     filename: "bundle.js",
   },
   mode: "development",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      `...`,
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ["imagemin-mozjpeg", { quality: 100 }],
+              ["imagemin-pngquant", { quality: [0.9, 1], speed: 4 }],
+              ["imagemin-gifsicle", { interlaced: true }],
+            ],
+          },
+        },
+        generator: [
+          {
+            type: "asset",
+            preset: "webp-custom-name",
+            implementation: ImageMinimizerPlugin.imageminGenerate,
+            options: {
+              plugins: ["imagemin-webp"],
+            },
+          },
+        ],
+      }),
+    ],
+  },
   devServer: {
     port: 9000,
     static: {
