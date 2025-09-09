@@ -17,6 +17,7 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.27.1",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
+    "@emotion/babel-plugin": "^11.13.5",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",

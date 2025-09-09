@@ -8,6 +8,7 @@ module.exports = merge(common, {
     filename: "bundle.js",
   },
   mode: "development",
+  devtool: "eval-source-map",
   optimization: {
     minimize: true,
     minimizer: [
