@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
-    "dev": "cross-env NODE_ENV=development webpack serve --config webpack/webpack.dev.config.js --hot"
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack/webpack.dev.config.js --hot",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,9 @@
   "description": "",
   "devDependencies": {
     "@babel/core": "^7.28.3",
+    "@babel/plugin-proposal-pipeline-operator": "^7.27.1",
     "@babel/preset-env": "^7.28.3",
+    "@babel/preset-typescript": "^7.27.1",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",
@@ -38,6 +41,7 @@
     "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
+    "typescript": "^5.9.2",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
@@ -47,6 +51,7 @@
     "glob": "^11.0.3",
     "jss": "^10.10.0",
     "jss-preset-default": "^10.10.0",
+    "loadsh": "^0.0.4",
     "webpack-merge": "^6.0.1"
   }
 }

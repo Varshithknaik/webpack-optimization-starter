@@ -12,6 +12,9 @@ const config = {
     //   keep: /\.css/ // webpack to keep the files
     // }
   },
+  resolve: {
+    extensions: [".js", ".ts"],
+  },
   module: {
     rules: [
       {
@@ -19,7 +22,7 @@ const config = {
         use: [{ loader: "html-loader" }],
       },
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
