@@ -6,6 +6,7 @@ const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const glob = require("glob");
 const path = require("path");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { chunk, min } = require("lodash-es");
 
 module.exports = merge(common, {
   output: {
@@ -74,6 +75,96 @@ module.exports = merge(common, {
         ],
       }),
     ],
+    runtimeChunk: "single", // Webpack will create an single runtime file
+    splitChunks: {
+      // Strategy #1
+      // cacheGroups: {
+      //   jQuery: {
+      //     test: /[\\/]node_modules[\\/]jquery[\\/]/,
+      //     chunks: "initial",
+      //     name: "jquery",
+      //   },
+      //   bootstrap: {
+      //     test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+      //     chunks: "initial",
+      //     name: "bootstrap",
+      //   },
+      // },
+      // Strategy #2
+      // chunks: "all",
+      // maxSize: 140000,
+      // minSize: 50000,
+      // name(module, chunks, cacheGroupKey) {
+      //   const filePathAsArray = module
+      //     .identifier()
+      //     .split("/")
+      //     .reduceRight((item) => item)
+      //     .replace(/[^a-zA-Z0-9_.-]/g, "");
+      //   const fileName = filePathAsArray[filePathAsArray.length - 1];
+      //   // return `${cacheGroupKey}-${fileName}`;
+      //   return fileName;
+      // },
+      // Startegy 2 Safer
+      // chunks: "all",
+      // maxSize: 140000,
+      // minSize: 5000,
+      // name(module, chunks, cacheGroupKey) {
+      //   const match =
+      //     module.context &&
+      //     module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
+      //   const packageName = match ? match[1].replace("@", "") : "misc";
+      //   return `${cacheGroupKey}-${packageName}`;
+      // },
+      // Strategy #3
+      // chunks: "all",
+      // maxSize: Infinity,
+      // cacheGroups: {
+      //   node_modules: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     name: "node_modules",
+      //   },
+      // },
+      // Strategy #4
+      // chunks: "all",
+      // maxSize: Infinity,
+      // cacheGroups: {
+      //   node_modules: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     name(module) {
+      //       const packageName = module.context.match(
+      //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+      //       )[1];
+      //       return packageName;
+      //     },
+      //   },
+      // },
+      //
+      //Custom Strategy for code-splitting
+      chunks: "all",
+      maxSize: Infinity,
+      minSize: 2000,
+      cacheGroups: {
+        jQuery: {
+          test: /[\\/]node_modules[\\/]jquery[\\/]/,
+          chunks: "initial",
+          name: "jquery",
+        },
+        bootstrap: {
+          test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+          chunks: "initial",
+          name: "bootstrap",
+        },
+        lodash: {
+          test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
+          chunks: "initial",
+          name: "lodash",
+        },
+        node_modules: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "node_modules",
+        },
+      },
+    },
   },
   module: {
     rules: [
