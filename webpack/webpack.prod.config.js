@@ -140,28 +140,38 @@ module.exports = merge(common, {
       // },
       //
       //Custom Strategy for code-splitting
-      chunks: "all",
+      chunks: "all", // "all" | "initial" | "async"
       maxSize: Infinity,
       minSize: 2000,
       cacheGroups: {
         jQuery: {
           test: /[\\/]node_modules[\\/]jquery[\\/]/,
-          chunks: "initial",
           name: "jquery",
+          priority: 2,
         },
-        bootstrap: {
-          test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
-          chunks: "initial",
-          name: "bootstrap",
-        },
+        //
+        // Removed for Lazy loading
+        // bootstrap: {
+        //   test: /[\\/]node_modules[\\/]bootstrap[\\/]/,
+        //   chunks: "initial",
+        //   name: "bootstrap",
+        // },
         lodash: {
           test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
-          chunks: "initial",
+          priority: 2,
           name: "lodash",
         },
         node_modules: {
           test: /[\\/]node_modules[\\/]/,
           name: "node_modules",
+          chunks: "initial",
+        },
+        async: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: "async",
+          name(module, chunks) {
+            return chunks.map((chunk) => chunk.name).join("-");
+          },
         },
       },
     },
