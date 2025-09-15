@@ -144,11 +144,13 @@ module.exports = merge(common, {
       maxSize: Infinity,
       minSize: 2000,
       cacheGroups: {
-        jQuery: {
-          test: /[\\/]node_modules[\\/]jquery[\\/]/,
-          name: "jquery",
-          priority: 2,
-        },
+        //
+        // Removed for Lazy loading
+        // jQuery: {
+        //   test: /[\\/]node_modules[\\/]jquery[\\/]/,
+        //   name: "jquery",
+        //   priority: 2,
+        // },
         //
         // Removed for Lazy loading
         // bootstrap: {
