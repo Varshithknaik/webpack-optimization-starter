@@ -11,6 +11,7 @@ const { chunk, min } = require("lodash-es");
 module.exports = merge(common, {
   output: {
     filename: "js/[name].[contenthash:12].js",
+    publicPath: "/",
   },
   mode: "production",
   devtool: "source-map",

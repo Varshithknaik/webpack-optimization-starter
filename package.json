@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
     "dev": "cross-env NODE_ENV=development webpack serve --config webpack/webpack.dev.config.js --hot",
     "typecheck": "tsc --noEmit",
-    "bundle-analyze": "cross-env NODE_ENV=development webpack --config webpack/webpack.analyze.config.js"
+    "bundle-analyze": "cross-env NODE_ENV=development webpack --config webpack/webpack.analyze.config.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -51,6 +52,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "express": "^5.1.0",
     "glob": "^11.0.3",
     "jquery": "^3.7.1",
     "jss": "^10.10.0",

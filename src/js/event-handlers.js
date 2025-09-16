@@ -20,11 +20,11 @@ export function newTodoEventHandler(event) {
   clearNewTodoInput();
 }
 
-export function removeTodoEventHandler(event) {
+export async function removeTodoEventHandler(event) {
   //   const id = getTodoId(event.target);
   //   removeTodo(id);
   //   renderTodos(getAllTodos());
-  Promise.all([
+  const [{ Modal }, { default: $ }] = await Promise.all([
     import(
       "bootstrap"
       /* webpackChunkName: "bootstrap" */
@@ -33,18 +33,18 @@ export function removeTodoEventHandler(event) {
       "jquery"
       /* webpackChunkName: "jquery" */
     ),
-  ]).then(([{ Modal }, { default: $ }]) => {
-    const id = getTodoId(event.target);
-    $("#modal-delete-todo").data("todo-id", id);
-    const deleteTodoModal = Modal.getOrCreateInstance(
-      document.getElementById("modal-delete-todo")
-    );
-    deleteTodoModal.show();
-  });
+  ]);
+
+  const id = getTodoId(event.target);
+  $("#modal-delete-todo").data("todo-id", id);
+  const deleteTodoModal = Modal.getOrCreateInstance(
+    document.getElementById("modal-delete-todo")
+  );
+  deleteTodoModal.show();
 }
 
-export function confirmRemoveEventHandler(event) {
-  Promise.all([
+export async function confirmRemoveEventHandler(event) {
+  const [{ Modal }, { default: $ }] = await Promise.all([
     import(
       "bootstrap"
       /* webpackChunkName: "bootstrap" */
@@ -53,15 +53,14 @@ export function confirmRemoveEventHandler(event) {
       "jquery"
       /* webpackChunkName: "jquery" */
     ),
-  ]).then(([{ Modal }, { default: $ }]) => {
-    const id = $("#modal-delete-todo").data("todo-id");
-    removeTodo(id);
-    renderTodos(getAllTodos());
-    const deleteTodoModal = Modal.getOrCreateInstance(
-      document.getElementById("modal-delete-todo")
-    );
-    deleteTodoModal.hide();
-  });
+  ]);
+  const id = $("#modal-delete-todo").data("todo-id");
+  removeTodo(id);
+  renderTodos(getAllTodos());
+  const deleteTodoModal = Modal.getOrCreateInstance(
+    document.getElementById("modal-delete-todo")
+  );
+  deleteTodoModal.hide();
 }
 
 export function toggleTodoEventListener(event) {
