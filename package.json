@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
-    "dev": "cross-env NODE_ENV=development webpack serve --config webpack/webpack.dev.config.js --hot",
+    "dev": "cross-env NODE_ENV=development node src/server.js",
     "typecheck": "tsc --noEmit",
     "bundle-analyze": "cross-env NODE_ENV=development webpack --config webpack/webpack.analyze.config.js",
     "start": "node src/server.js"
@@ -48,6 +48,7 @@
     "webpack": "^5.101.3",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
+    "webpack-dev-middleware": "^7.4.3",
     "webpack-dev-server": "^5.2.2"
   },
   "dependencies": {

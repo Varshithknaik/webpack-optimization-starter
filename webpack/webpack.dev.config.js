@@ -6,6 +6,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 module.exports = merge(common, {
   output: {
     filename: "bundle.js",
+    publicPath: "/",
   },
   mode: "development",
   devtool: "eval-source-map",

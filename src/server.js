@@ -2,6 +2,17 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+if (process.env.NODE_ENV == "development") {
+  console.log("development mode");
+  const webpackDevMiddleware = require("webpack-dev-middleware");
+  const configuration = require("../webpack/webpack.dev.config");
+  const webpack = require("webpack");
+  const webpackCompiler = webpack(configuration);
+  app.use(
+    webpackDevMiddleware(webpackCompiler, configuration.devServer.devMiddleware)
+  );
+}
+
 app.get("/", function (req, res) {
   const absolutePathToHtmlFile = path.resolve(__dirname, "../dist/index.html");
   res.sendFile(absolutePathToHtmlFile);
