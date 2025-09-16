@@ -2,8 +2,10 @@ const common = require("./webpack.common.config.js");
 const { merge } = require("webpack-merge");
 const path = require("path");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = merge(common, {
+  entry: "./src/js/index-dev.js",
   output: {
     filename: "bundle.js",
     publicPath: "/",
@@ -108,4 +110,5 @@ module.exports = merge(common, {
       },
     ],
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });

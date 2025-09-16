@@ -11,6 +11,11 @@ if (process.env.NODE_ENV == "development") {
   app.use(
     webpackDevMiddleware(webpackCompiler, configuration.devServer.devMiddleware)
   );
+
+  const webpackHotMiddleware = require("webpack-hot-middleware");
+  app.use(webpackHotMiddleware(webpackCompiler));
+} else {
+  console.log("production mode");
 }
 
 app.get("/", function (req, res) {
