@@ -6,7 +6,7 @@ const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const glob = require("glob");
 const path = require("path");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const { chunk, min } = require("lodash-es");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = merge(common, {
   entry: "./src/js/index.js",
@@ -259,6 +259,17 @@ module.exports = merge(common, {
       paths: glob.sync(`${path.join(__dirname, "../src/")}/**/*`, {
         nodir: true,
       }),
+    }),
+    new CompressionPlugin({
+      filename: "[path][base].gz",
+      algorithm: "gzip",
+      test: /\.(css|js)$/,
+    }),
+    new CompressionPlugin({
+      filename: "[path][base],br",
+      algorithm: "brotliCompress",
+      test: /\.(css|js)$/,
+      compressionOptions: { level: 11 },
     }),
   ],
 });
